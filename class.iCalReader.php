@@ -345,9 +345,13 @@ class ICal
     public function process_recurrences()
     {
         $array = $this->cal;
+        if (!isset($array['VEVENT']))
+            return false;
+            
         $events = $array['VEVENT'];
         if (empty($events))
             return false;
+            
         foreach ($array['VEVENT'] as $anEvent) {
             if (isset($anEvent['RRULE']) && $anEvent['RRULE'] != '') {
                 // Recurring event, parse RRULE and add appropriate duplicate events
